@@ -48,27 +48,27 @@ namespace Restaurant_ad0666
             this.pnNavigation.Name = "pnNavigation";
             this.pnNavigation.Size = new System.Drawing.Size(250, 758);
             this.pnNavigation.TabIndex = 0;
-            this.pnNavigation.Paint += new System.Windows.Forms.PaintEventHandler(this.pnNavigation_Paint);
+            this.pnNavigation.Click += new System.EventHandler(this.homeButton);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(0, 402);
+            this.button2.Location = new System.Drawing.Point(0, 328);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(244, 59);
             this.button2.TabIndex = 1;
             this.button2.Text = "CURD";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.curdButton);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(0, 220);
+            this.button1.Location = new System.Drawing.Point(0, 128);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(244, 59);
             this.button1.TabIndex = 0;
             this.button1.Text = "home";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.homeButton);
             // 
             // pnHeader
             // 

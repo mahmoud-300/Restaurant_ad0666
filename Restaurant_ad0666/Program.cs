@@ -19,5 +19,6 @@ namespace Restaurant_ad0666
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FmLogin());
         }
-    }
+    } 
 }
+ 

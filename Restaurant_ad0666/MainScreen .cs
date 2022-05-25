@@ -12,14 +12,16 @@ namespace Restaurant_ad0666
 {
     public partial class MainScreen : Form
     {
-        public MainScreen()
+        private string setValueForText1;
+
+        public MainScreen(string setValueForText1)
         {
             InitializeComponent(); 
-            
+              this.setValueForText1 = setValueForText1;
         
         }
 
-       
+      
 
         private void MainScreen_Load(object sender, EventArgs e)
         {
@@ -30,15 +32,13 @@ namespace Restaurant_ad0666
             homeScreen.Dock = DockStyle.Fill;
             this.pnMain.Controls.Add(homeScreen);
             homeScreen.FormBorderStyle = FormBorderStyle.None;
-          
+            this.label1.Text = setValueForText1;
             homeScreen.Show();
         }
 
-        private void pnNavigation_Paint(object sender, PaintEventArgs e)
-        {
+       
 
-        }
-        private void button1_Click(object sender, EventArgs e)
+        private void homeButton(object sender, EventArgs e)
         {
             this.pnMain.Controls.Clear();
             HomeScreen homeScreen = new HomeScreen();
@@ -51,9 +51,7 @@ namespace Restaurant_ad0666
             homeScreen.Show();
         }
 
-    
-
-        private void button2_Click(object sender, EventArgs e)
+        private void curdButton(object sender, EventArgs e)
         {
             FrmCurd curdScreen = new FrmCurd();
             this.pnMain.Controls.Clear();
@@ -64,7 +62,6 @@ namespace Restaurant_ad0666
             curdScreen.FormBorderStyle = FormBorderStyle.None;
 
             curdScreen.Show();
-
         }
     }
 }

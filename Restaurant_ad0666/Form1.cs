@@ -17,17 +17,16 @@ namespace Restaurant_ad0666
         public FmLogin()
         {
             InitializeComponent();
-            User user1 = new User(1, "mahmoud", "123456");
-            User user2 = new User(2, "ahmad", "12345678");
-            User user3 = new User(3, "admin", "1234");
+            User user1 = new User(1, "admin", "123456");
+           
             UserList.Add(user1);
-            UserList.Add(user2);
+           
         }
 
         private void buLogin_Click(object sender, EventArgs e)
-        {
-            MainScreen mainScreen = new MainScreen();
-            setValueForText1 = this.txtUser.Text;
+        {  setValueForText1 = this.txtUser.Text;
+            MainScreen mainScreen = new MainScreen(setValueForText1);
+          
             string userName = txtUser.Text;
             string password = txtPassword.Text;
             foreach (User user in UserList)

@@ -76,7 +76,7 @@ namespace Restaurant_ad0666
             this.txtNO.Size = new System.Drawing.Size(262, 27);
             this.txtNO.TabIndex = 3;
             // 
-            // txtPrice
+            // txtPrice       
             // 
             this.txtPrice.Location = new System.Drawing.Point(94, 185);
             this.txtPrice.Name = "txtPrice";

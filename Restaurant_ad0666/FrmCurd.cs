@@ -13,10 +13,10 @@ namespace Restaurant_ad0666
 {
     public partial class FrmCurd : Form
     {
-        string connectionSttring = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Hp\Documents\Database_res.accdb";
+        string connectionSttring = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\Hp\Desktop\university\second\Visual Programming\Restaurant_ad0666\Restaurant_ad0666\Database_ layer\Database_res.accdb";
         OleDbConnection accessDatabaseConnection = null;
         //MS Access Database Connection String
-       
+
         public FrmCurd()
         {
             accessDatabaseConnection = new OleDbConnection(connectionSttring);
@@ -43,9 +43,9 @@ namespace Restaurant_ad0666
                 {
                     accessDatabaseConnection.Open();
                 }
-                
 
-                insertCommand.Parameters.AddWithValue("@orderNo", Convert.ToInt32(txtNO.Text) );
+
+                insertCommand.Parameters.AddWithValue("@orderNo", Convert.ToInt32(txtNO.Text));
                 insertCommand.Parameters.AddWithValue("@order", txtOrder.Text);
                 insertCommand.Parameters.AddWithValue("@price", Convert.ToInt32(txtPrice.Text));
                 insertCommand.ExecuteNonQuery();
@@ -57,7 +57,7 @@ namespace Restaurant_ad0666
                 dataGridView1.DataSource = dt;
                 dataGridView1.Columns["orderNo"].DisplayIndex = 0;
                 dataGridView1.Columns["order"].DisplayIndex = 1;
-                dataGridView1.Columns["price"].DisplayIndex = 2; 
+                dataGridView1.Columns["price"].DisplayIndex = 2;
                 //ok
 
             }
@@ -66,39 +66,52 @@ namespace Restaurant_ad0666
 
         private void update_Click(object sender, EventArgs e)
         {
-
-            if (accessDatabaseConnection.State != ConnectionState.Open)
+            try
             {
-                accessDatabaseConnection.Open();
+                using (OleDbCommand updateCommand = new OleDbCommand("UPDATE TABLE1 SET [orderNo] = ?, [order] = ?,[price] = ? WHERE [ID] = ?", accessDatabaseConnection))
+                {
+                    if (accessDatabaseConnection.State != ConnectionState.Open)
+                    {
+                        accessDatabaseConnection.Open();
+                    }
+
+                    updateCommand.Parameters.AddWithValue("@orderNo", Convert.ToInt32(txtNO.Text));
+                    updateCommand.Parameters.AddWithValue("@order", txtOrder.Text);
+                    updateCommand.Parameters.AddWithValue("@price", Convert.ToInt32(txtPrice.Text));
+                    updateCommand.Parameters.AddWithValue("@ID", dataGridView1.CurrentRow.Cells[0].Value);
+
+                    updateCommand.ExecuteNonQuery();
+                    MessageBox.Show("data updated successefully");
+                }
             }
-            OleDbCommand updateCmd = new OleDbCommand("UPDATE TABLE1 SET orderNo = @orderNo, order=@order, price=@price WHERE orderNo = @orderNo", accessDatabaseConnection);
-            updateCmd.Parameters.AddWithValue("@orderNo", Convert.ToInt32(txtNO.Text));
-            updateCmd.Parameters.AddWithValue("@order", txtOrder.Text);
-            updateCmd.Parameters.AddWithValue("@price", Convert.ToInt32(txtPrice.Text));
-           
-            updateCmd.ExecuteNonQuery();
-            MessageBox.Show("Data updated successfully");
-            OleDbCommand refreshCmd = new OleDbCommand("SELECT * FROM TABLE1", accessDatabaseConnection);
-            DataTable dt = new DataTable();
-            dt.Load(refreshCmd.ExecuteReader());
-            dataGridView1.DataSource = dt;
-            dataGridView1.DataSource = dt;
-            dataGridView1.Columns["orderNo"].DisplayIndex = 0;
-            dataGridView1.Columns["order"].DisplayIndex = 1;
-            dataGridView1.Columns["price"].DisplayIndex = 2;
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+
+
         }
 
         private void del_Button(object sender, EventArgs e)
         {
-            string query = "Delete From Student Where Id=@id";
-            OleDbCommand updat = new OleDbCommand(query, accessDatabaseConnection);
-            updat.Parameters.AddWithValue("@id", dataGridView1.CurrentRow.Cells[0].Value);
-            accessDatabaseConnection.Open();
-            updat.ExecuteNonQuery();
-            accessDatabaseConnection.Close();
-            
-        }
+       
+            try {
+                
+                using (OleDbCommand deleteCommand = new OleDbCommand("DELETE FROM TABLE1 WHERE [ID] = ?", accessDatabaseConnection))
+                {
+                    if (accessDatabaseConnection.State != ConnectionState.Open)
+                    {
+                        accessDatabaseConnection.Open();
+                    }
+                   
+                      deleteCommand.Parameters.AddWithValue("@ID", dataGridView1.CurrentRow.Cells[0].Value);
 
+                    deleteCommand.ExecuteNonQuery();
+                    MessageBox.Show("Data deleted successfully");
+                }
+
+            }  catch (Exception ex) { MessageBox.Show(ex.Message); }
+           
+
+
+        }
     }
-    }
+}
 
