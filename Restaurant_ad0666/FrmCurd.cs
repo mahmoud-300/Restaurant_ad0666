@@ -58,7 +58,7 @@ namespace Restaurant_ad0666
                 dataGridView1.Columns["orderNo"].DisplayIndex = 0;
                 dataGridView1.Columns["order"].DisplayIndex = 1;
                 dataGridView1.Columns["price"].DisplayIndex = 2; 
-                
+                //ok
 
             }
 
